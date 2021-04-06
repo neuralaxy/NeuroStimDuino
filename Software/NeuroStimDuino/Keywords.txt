@@ -1,0 +1,69 @@
+#######################################
+# Syntax Coloring Map for NeruoStimDuino
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+NSWire	KEYWORD1
+AMPL	KEYWORD1
+FREQ	KEYWORD1
+DURN	KEYWORD1
+IDLY	KEYWORD1
+DELY	KEYWORD1
+SYMM	KEYWORD1
+ADDR	KEYWORD1
+SAMP	KEYWORD1
+READ	KEYWORD1
+RSET	KEYWORD1
+EOFF	KEYWORD1
+STIM	KEYWORD1
+STOP	KEYWORD1
+ENAB	KEYWORD1
+WAIT	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+cmd_led_on	KEYWORD2
+cmd_led_off	KEYWORD2
+setAmplitude_Callback	KEYWORD2
+setFrequency_Callback	KEYWORD2
+setPulseDuration_Callback	KEYWORD2
+setInterPhaseDelay_Callback	KEYWORD2
+setStartDelay_Callback	KEYWORD2
+setWaveformSymmetry_Callback	KEYWORD2
+changeI2Caddress_Callback	KEYWORD2
+resetNeuroStimDuino_Callback	KEYWORD2
+startStimulation_Callback	KEYWORD2
+stopStimulation_Callback	KEYWORD2
+enableChannel_Callback	KEYWORD2
+setEmergencyOFF_Callback	KEYWORD2
+readRegister_Callback	KEYWORD2
+setIdle_Callback	KEYWORD2
+commandsMenu_Callback	KEYWORD2
+startCurrentSampling_Callback	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+default_i2c_addr	LITERAL1
+FourBytesCommds	LITERAL1
+ThreeBytesCommds	LITERAL1
+TwoBytesCommds	LITERAL1
+OneByteCommds	LITERAL1
+AMPL_UPP_LIMIT	LITERAL1
+AMPL_LOW_LIMIT	LITERAL1
+FREQ_UPP_LIMIT	LITERAL1
+FREQ_LOW_LIMIT	LITERAL1
+DURN_UPP_LIMIT	LITERAL1
+DURN_LOW_LIMIT	LITERAL1
+IDLY_UPP_LIMIT	LITERAL1
+IDLY_LOW_LIMIT	LITERAL1
+DELY_UPP_LIMIT	LITERAL1
+DELY_LOW_LIMIT	LITERAL1
+ADDR_UPP_LIMIT	LITERAL1
+ADDR_LOW_LIMIT	LITERAL1
