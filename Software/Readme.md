@@ -23,7 +23,7 @@ NeuroStimDuino can be controlled by an external microcontroller such as Arduino 
 |  STIM | 0x10 | Start stimulation on channel 1 or 2 for finite duration or stimulate indefinitely | 0 - 255 Sec; <br /> Stim indefinitely flag = 0/1| 
 |  STOP | 0x12 | Stop stimulation on channel 1 or 2 | - | 
 |  ENAB | 0x14 | Enable or disable a stim. channel | 1 = Enable; 0 = Disable | 
-|  IDLE  | 0x20 | Idle | - |
+|  WAIT  | 0x20 | Idle | - |
 
 ## Arduino Example
 An example sketch is included: NeuroStimDuino_SerialControl.ino to send I2C commands to NeuroStimDuino over the serial port. Set the baudrate at 115200 bps and add "CR+LF" at the end of each command. For using this library, you will need to install SerialCommands library available from Pedro Pereira at https://github.com/ppedro74/Arduino-SerialCommands
