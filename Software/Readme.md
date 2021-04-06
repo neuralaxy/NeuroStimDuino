@@ -26,4 +26,13 @@ NeuroStimDuino can be controlled by an external microcontroller such as Arduino 
 |  IDLE  | 0x20 | Idle | - |
 
 ## Arduino Example
-An example sketch is included: NeuroStimDuino_SerialControl.ino to send I2C commands to NeuroStimDuino. The library will automatically switch between SDA, SCL pins (Wire) for Arduino MEGA256 and SDA1,SCL1 pins (Wire1) for Arduino Due. Pull-up resistors for I2C communication are already placed onboard NeuroStimDuino and hence additional pull-up resistors are not required.   
+An example sketch is included: NeuroStimDuino_SerialControl.ino to send I2C commands to NeuroStimDuino over the serial port. Set the baudrate at 115200 bps and add "CR+LF" at the end of each command. For using this library, you will need to install SerialCommands library available from Pedro Pereira at https://github.com/ppedro74/Arduino-SerialCommands
+
+**Some examples of Commands sent over COM port** <br />
+* AMPL 1 63     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set Channel 1 intensity at 63 potentiometer counts ~ 10mA
+* FREQ 1 20     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Set Channel 1 frequency at 20Hz
+* DURN 1 500    &nbsp;&nbsp;&nbsp;&nbsp; // Set Channel 1 pulse duration at 500 uSec
+* STIM 1 20 0   &nbsp;&nbsp;&nbsp;&nbsp; // Turn on Channel 1 for 20 seconds
+* STIM 1 XX 1   &nbsp;&nbsp;&nbsp;&nbsp; // Turn on Channel 1 indefinitely
+
+The library will automatically switch between SDA, SCL pins (Wire) for Arduino MEGA256 and SDA1,SCL1 pins (Wire1) for Arduino Due. Pull-up resistors for I2C communication are already placed onboard NeuroStimDuino and hence additional pull-up resistors are not required.   
