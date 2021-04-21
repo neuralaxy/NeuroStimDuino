@@ -85,6 +85,7 @@ void startStimulation_Callback(SerialCommands* );
 void stopStimulation_Callback(SerialCommands* );
 void enableChannel_Callback(SerialCommands* );
 void setEmergencyOFF_Callback(SerialCommands* );
+void startCurrentSampling_Callback(SerialCommands* );
 void cmd_unrecognized(SerialCommands* , const char* );
 int I2Cwrite(int , uint8_t , uint8_t , int , int );  
 
