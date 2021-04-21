@@ -389,6 +389,24 @@ void enableChannel_Callback(SerialCommands* sender)
   }  
 }
 
+void startCurrentSampling_Callback(SerialCommands* sender)
+{
+	 int i2c_error = -1;
+	 char* chan_str = sender->Next();
+	 if (chan_str == NULL)
+	 {
+		 sender->GetSerial()->println("ERROR! Channel # is missing ");
+		 return;
+	 }
+	 int chan = atoi(chan_str);
+	 i2c_error = I2Cwrite(TwoBytesCommds, SAMP, chan);
+	 if (i2c_error != 0){
+		 sender->GetSerial()->print("I2C error = ");
+		 sender->GetSerial()->println(i2c_error);
+	 }
+	
+}
+
 /*
 NeuroStimDuino::NeuroStimDuino(uint8_t addr = default_i2c_addr)
 {  
