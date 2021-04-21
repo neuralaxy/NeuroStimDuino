@@ -36,3 +36,9 @@ An example sketch is included: NeuroStimDuino_SerialControl.ino to send I2C comm
 * STIM 1 XX 1   &nbsp;&nbsp;&nbsp;&nbsp; // Turn on Channel 1 indefinitely
 
 The library will automatically switch between SDA, SCL pins (Wire) for Arduino MEGA256 and SDA1,SCL1 pins (Wire1) for Arduino Due. Pull-up resistors for I2C communication are already placed onboard NeuroStimDuino and hence additional pull-up resistors are not required.   
+
+## Measure Stimulation Output
+Using an on-baord current sense amplifier you can measure the stimulation output as shown below - 
+
+![Symmetrical_Asymm_Outputs_500us](https://user-images.githubusercontent.com/80208904/115607178-a7525000-a2b2-11eb-8d5b-1cbbaa320363.png)
+Signal traces were obtained above by averaging 10 trials for each amplitude setting, in order to minimize background noise. 
