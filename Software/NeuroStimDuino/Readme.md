@@ -16,7 +16,7 @@ NeuroStimDuino can be controlled by an external microcontroller such as Arduino 
 |  DELY | 0x05 | Delay to the start of the stimulation pulse in each cycle | 0 - 1/(stimulation frequency), Unit: mSec.|
 |  SYMM | 0x06 | Generate symmetrical or asymmetrical stim waveform | 1 = Symm.; 0 = Asymm. |
 |  ADDR  | 0x07 | Change 7-bit I2C address | Allowed addresses = 0x08 - 0x77|
-|  SAMP  | 0x08 | Sample current from active channels |  - |
+|  SAMP  | 0x08 | Sample current on channel 1 or 2 | - |
 |  READ  | 0x09 | Read value of register | - |
 |  RSET  | 0x0A | Reset NeuroStimDuino to default register values | - |
 |  EOFF | 0x0F | Generate Emergency Off condition | - |
