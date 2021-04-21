@@ -38,12 +38,12 @@ SerialCommand startStimulation("STIM", startStimulation_Callback);              
 SerialCommand stopStimulation("STOP", stopStimulation_Callback);                // e.g. STOP 2        // Stop channel 2
 SerialCommand enableChannel("ENAB", enableChannel_Callback);                    // e.g. ENAB 1 1      // will enable channel 1; ENAB 1 0 will disable channel 1
 SerialCommand setEmergencyOFF("EOFF", setEmergencyOFF_Callback);                // e.g. EOFF
+SerialCommand startCurrentSampling("SAMP", startCurrentSampling_Callback);      // e.g. SAMP 1        // sample current on channel 1 @20kHz
 
 /* Pending
 SerialCommand readRegister("READ", readRegister_Callback);
 SerialCommand setIdle("WAIT", setIdle_Callback);
 SerialCommand commandsMenu("MENU", commandsMenu_Callback);
-SerialCommand startCurrentSampling("SAMP", startCurrentSampling_Callback);
 One key commands
 */
 
@@ -71,10 +71,10 @@ void setup()
   serial_commands_.AddCommand(&stopStimulation);
   serial_commands_.AddCommand(&enableChannel);
   serial_commands_.AddCommand(&setEmergencyOFF);
+  serial_commands_.AddCommand(&startCurrentSampling);
   
   //serial_commands_.AddCommand(&setIdle);
   //serial_commands_.AddCommand(&commandsMenu);
-  //serial_commands_.AddCommand(&startCurrentSampling);
   //serial_commands_.AddCommand(&readRegister);
   
   
