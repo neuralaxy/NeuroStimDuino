@@ -15,12 +15,12 @@ NeuroStimDuino can be controlled by an external microcontroller such as Arduino 
 |  IDLY | 0x04 | Change inter-phase delay | 0 - 255, Unit: uSec. |
 |  DELY | 0x05 | Delay to the start of the stimulation pulse in each cycle | 0 - 1/(stimulation frequency), Unit: mSec.|
 |  SYMM | 0x06 | Generate symmetrical or asymmetrical stim waveform | 1 = Symm.; 0 = Asymm. |
-|  ADDR  | 0x07 | Change 7-bit I2C address | Allowed addresses = 0x08 - 0x77|
+|  ADDR  | 0x07 | Change 7-bit I2C address | Allowed addresses = 0x08 - 0x77; <br /> program/switch_only flag = 1/0|
 |  SAMP  | 0x08 | Sample current on channel 1 or 2 | - |
 |  READ  | 0x09 | Read value of register | - |
 |  RSET  | 0x0A | Reset NeuroStimDuino to default register values | - |
 |  EOFF | 0x0F | Generate Emergency Off condition | - |
-|  STIM | 0x10 | Start stimulation on channel 1 or 2 for finite duration or stimulate indefinitely | 0 - 255 Sec; <br /> Stim indefinitely flag = 0/1| 
+|  STIM | 0x10 | Start stimulation on channel 1 or 2 for finite duration or stimulate indefinitely | 0 - 255 Sec; <br /> Stim indefinitely flag = 1/0| 
 |  STOP | 0x12 | Stop stimulation on channel 1 or 2 | - | 
 |  ENAB | 0x14 | Enable or disable a stim. channel | 1 = Enable; 0 = Disable | 
 |  WAIT  | 0x20 | Idle | - |
