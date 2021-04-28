@@ -268,14 +268,35 @@ void changeI2Caddress_Callback(SerialCommands* sender)
   {
     sender->GetSerial()->println("ERROR! ADDR outside range ");
     return;
-  }  
-  i2c_error = I2Cwrite(ThreeBytesCommds, ADDR, -1, val); 
-  if (i2c_error != 0){
-    sender->GetSerial()->print("I2C error = ");
-    sender->GetSerial()->println(i2c_error);   
-  }else{
-    NSDuino_address = val; // Update I2C address of current slave that will be communicated with 
   }
+  val_str = sender->Next();
+  if (val_str == NULL)
+  {
+	  sender->GetSerial()->println("ERROR! ADDR program flag 0/1 is missing ");
+	  return;
+  }
+  int program_addr = atoi(val_str);
+  if (program_addr != 0 && program_addr != 1)
+  {
+	  sender->GetSerial()->println("ERROR! ADDR program flag outside range ");
+	  return;
+  } 
+  if (program_addr == 1){
+	  i2c_error = I2Cwrite(ThreeBytesCommds, ADDR, -1, val);
+	  if (i2c_error != 0){
+		  sender->GetSerial()->print("I2C error = ");
+		  sender->GetSerial()->println(i2c_error);
+		  }else{
+		  NSDuino_address = val; // Update I2C address of current slave that will be communicated with
+		  sender->GetSerial()->print("Current I2C slave address = ");
+		  sender->GetSerial()->println(NSDuino_address, DEC);
+	  }	  
+  }else{
+	  //Only change I2C address of current slave device. Do not program the I2C address
+	  NSDuino_address = val;
+	  sender->GetSerial()->print("Current I2C slave address = ");
+	  sender->GetSerial()->println(NSDuino_address, DEC);
+  } 
 }
 
 void resetNeuroStimDuino_Callback(SerialCommands* sender)
