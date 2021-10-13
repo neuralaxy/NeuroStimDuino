@@ -44,16 +44,18 @@
 #define DURN_LOW_LIMIT  0
 #define IDLY_UPP_LIMIT  255
 #define IDLY_LOW_LIMIT  0
-#define DELY_UPP_LIMIT  33  //max. possible @3Hz stim frequency
+#define DELY_UPP_LIMIT  165  //50% of max. possible @3Hz stim frequency, 
 #define DELY_LOW_LIMIT  0
 #define ADDR_UPP_LIMIT  119
 #define ADDR_LOW_LIMIT  8
 
 
 const int ArduinoLedPin = 13;
+const int Data_samples_size = 100;
 extern volatile int NSDuino_address; 
 
-enum I2Ccommand {    
+enum I2Ccommand {
+	ERR  = 0x00,    
     AMPL = 0x01,
     FREQ = 0x02,
     DURN = 0x03,
@@ -86,8 +88,14 @@ void stopStimulation_Callback(SerialCommands* );
 void enableChannel_Callback(SerialCommands* );
 void setEmergencyOFF_Callback(SerialCommands* );
 void startCurrentSampling_Callback(SerialCommands* );
+void readRegister_Callback(SerialCommands* );
 void cmd_unrecognized(SerialCommands* , const char* );
-int I2Cwrite(int , uint8_t , uint8_t , int , int );  
+void print_Channel_Parameters(int );
+int I2Cwrite(int , uint8_t , uint8_t , uint8_t , uint8_t );
+int I2Cread(int ); 
+char* I2Cread_byte_array(int );
+
+enum I2Ccommand str2enum (const char* );
 
 /*
 class NeuroStimDuino
