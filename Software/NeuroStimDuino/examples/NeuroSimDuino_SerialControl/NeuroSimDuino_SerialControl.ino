@@ -38,10 +38,10 @@ SerialCommand startStimulation("STIM", startStimulation_Callback);              
 SerialCommand stopStimulation("STOP", stopStimulation_Callback);                // e.g. STOP 2        // Stop channel 2
 SerialCommand enableChannel("ENAB", enableChannel_Callback);                    // e.g. ENAB 1 1      // will enable channel 1; ENAB 1 0 will disable channel 1
 SerialCommand setEmergencyOFF("EOFF", setEmergencyOFF_Callback);                // e.g. EOFF
-SerialCommand startCurrentSampling("SAMP", startCurrentSampling_Callback);      // e.g. SAMP 1        // sample current on channel 1 @20kHz
+SerialCommand startCurrentSampling("SAMP", startCurrentSampling_Callback);		// e.g. SAMP 1        // sample current on channel 1 @20kHz
+SerialCommand readRegister("READ", readRegister_Callback);          			// e.g. READ 1 AMPL	  // Read current value of channel 1 amplitude
 
 /* Pending
-SerialCommand readRegister("READ", readRegister_Callback);
 SerialCommand setIdle("WAIT", setIdle_Callback);
 SerialCommand commandsMenu("MENU", commandsMenu_Callback);
 One key commands
@@ -50,7 +50,8 @@ One key commands
 void setup() 
 {
   Serial.begin(115200);
-  NSWire.begin(); 
+  NSWire.begin();
+  delay(50); // Add delay for NeuroStimDuino to initialize 
 
   //Configure the LED for output and sets the intial state to off
   pinMode(ArduinoLedPin, OUTPUT);
@@ -72,13 +73,15 @@ void setup()
   serial_commands_.AddCommand(&enableChannel);
   serial_commands_.AddCommand(&setEmergencyOFF);
   serial_commands_.AddCommand(&startCurrentSampling);
-  
-  //serial_commands_.AddCommand(&setIdle);
+  serial_commands_.AddCommand(&readRegister);
+
+  //serial_commands_.AddCommand(&setIdle); 
   //serial_commands_.AddCommand(&commandsMenu);
-  //serial_commands_.AddCommand(&readRegister);
-  
-  
-  Serial.println("Ready!");
+    
+  Serial.println("*****   Welcome to NeuroStimDuino - by Neuralaxy   *****"); 
+  print_Channel_Parameters(1);
+  Serial.println(" "); 
+  print_Channel_Parameters(2); 
 }
 
 void loop() 
