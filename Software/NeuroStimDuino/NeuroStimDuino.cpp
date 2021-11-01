@@ -147,6 +147,8 @@ void setAmplitude_Callback(SerialCommands* sender)
     sender->GetSerial()->println("ERROR! Value outside range ");
     return;
   }
+  //Convert stim amplitude from milliAmps to digital potentiometer counts (0-127)
+  val = val/current_conversion_ratio;
   i2c_error = I2Cwrite(ThreeBytesCommds, AMPL, chan, val); 
   if (i2c_error != 0){
     sender->GetSerial()->print("I2C error = ");
@@ -155,6 +157,8 @@ void setAmplitude_Callback(SerialCommands* sender)
   delay(3); // Required for dsPIC to finish processing I2C write command
   // Now read the register value
   val = I2Cread(1);	
+  //Convert stim amplitude from digital potentiometer count to milliAmps
+  val = ceil(val*current_conversion_ratio);
   sender->GetSerial()->print("Channel ");
   sender->GetSerial()->print(chan);
   sender->GetSerial()->print(", amplitude is set to ");
@@ -638,7 +642,11 @@ void readRegister_Callback(SerialCommands* sender)
 	if (reg_addr == DURN){
 		reg_val = I2Cread(2);	
 	}else{
-		reg_val = I2Cread(1);	
+		reg_val = I2Cread(1);
+		if (reg_addr == AMPL){
+			//Convert stim amplitude from digital potentiometer count to milliAmps
+			reg_val = ceil(reg_val*current_conversion_ratio);
+		}
 	}	
 	sender->GetSerial()->print("Channel ");
 	sender->GetSerial()->print(chan);
@@ -672,7 +680,9 @@ void print_Channel_Parameters(int chan_no)
        reg_val = I2Cread(1); 
      }
       switch(reg_addr){
-        case AMPL:
+       case AMPL:
+				  //Convert stim amplitude from digital potentiometer count to milliAmps
+			      reg_val = ceil(reg_val*current_conversion_ratio);
                   sprintf(buff,"Amplitude (mA): .........................%d", reg_val);                          
                   Serial.println(buff); 
                   break;                                           

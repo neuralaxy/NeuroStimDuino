@@ -45,6 +45,8 @@ readRegister_Callback	KEYWORD2
 setIdle_Callback	KEYWORD2
 commandsMenu_Callback	KEYWORD2
 startCurrentSampling_Callback	KEYWORD2
+readRegister_Callback	KEYWORD2
+print_Channel_Parameters	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -67,3 +69,4 @@ DELY_UPP_LIMIT	LITERAL1
 DELY_LOW_LIMIT	LITERAL1
 ADDR_UPP_LIMIT	LITERAL1
 ADDR_LOW_LIMIT	LITERAL1
+current_conversion_ratio LITERAL1

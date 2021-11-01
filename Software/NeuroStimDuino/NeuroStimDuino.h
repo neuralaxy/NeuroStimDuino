@@ -36,7 +36,7 @@
 #define ThreeBytesCommds 3 
 #define TwoBytesCommds 2
 #define OneByteCommds 1
-#define AMPL_UPP_LIMIT  127
+#define AMPL_UPP_LIMIT  25	//25 milliAmps max
 #define AMPL_LOW_LIMIT  0
 #define FREQ_UPP_LIMIT  100
 #define FREQ_LOW_LIMIT  3
@@ -52,6 +52,7 @@
 
 const int ArduinoLedPin = 13;
 const int Data_samples_size = 100;
+const float current_conversion_ratio = 0.24; // 0.24 mA/(digiPOT_count) 
 extern volatile int NSDuino_address; 
 
 enum I2Ccommand {
@@ -70,7 +71,7 @@ enum I2Ccommand {
     STIM = 0x10,
     STOP = 0x12,
     ENAB = 0x14,
-    WAIT = 0x20
+    WAIT = 0x20		//unimplemented
 };
 
 void cmd_led_on(SerialCommands* );
