@@ -21,9 +21,22 @@ An open source neurostimulator for students, researchers, and hobbyists interest
 
 ![20200817_080616](https://user-images.githubusercontent.com/80208904/139632181-44e05390-6c77-4859-948c-c67302b4d6e7.jpg)
 
+* Ensure the jumper settings for selecting the shape of the current waveforms are set to "x1" or Symmetrical, as shown below. 
+
+![Jumper_setting](https://user-images.githubusercontent.com/80208904/139680237-4bc0fdc4-0f7b-4856-a3ff-84fe2959e0a4.jpg)
+
+* The High-Voltage Power Switch S3 turns ON/OFF the +/-72V DC-DC converter (NMT0572SC). When using NeuroStimDuino for the first time we recommend starting with the switch in OFF position. Afterwards, once you are ready to stimulate then flip the switch ON. That way even if you accidentally turn ON the stimulation, it will not have any effect because the high-voltage source will be OFF. Plus it will also help extend battery life. 
+
+![power_switch](https://user-images.githubusercontent.com/80208904/139684900-5c1c3573-6c94-4e15-9f8a-692e6af69ae4.png)
+
 * To control NeuroStimDuino using an Arduino Due or Mega, stack NeuroStimDuino on top of the Arduino board by aligning the hearder pins, as shown below.
 
 ![20210426_080326](https://user-images.githubusercontent.com/80208904/139623995-dda8e7de-36c7-4d57-898c-be94603645a9.jpg)
+
+* Once the hardware setup is complete, the amber or yellow Emergency-OFF LED will remain continuously ON. Also TEST_LED1 and TEST_LED2 will start blinking at a rate of 10 Hz
+
+![20210927_151823](https://user-images.githubusercontent.com/80208904/139687809-0c590ef5-987f-4c82-96e6-ba40544af32c.jpg)
+
 
 ## Software Setup
 * Next, you will need to download the latest version of our [Arduino library](https://github.com/neuralaxy/NeuroStimDuino/tree/main/Software/NeuroStimDuino). Read the full update [here](https://www.crowdsupply.com/neuralaxy/neurostimduino/updates/arduino-library-released) and remember to install the [SerialCommands library] (https://github.com/ppedro74/Arduino-SerialCommands) from Pedro Pereira. Next, upload the example code NeuroStimDuino_SerialControl.ino onto the Arduino.  
@@ -41,7 +54,8 @@ FREQ 2 50        // This will set Channel 2's frequency at 50Hz. You will see th
 AMPL 1 15        // Set Channel 1 intensity 15mA
 DURN 1 500       // Set Channel 1 pulse duration at 500 uSec
 ENAB 1 1         // This will enable Channel 1 of the stimulation. By default, both channels are enabled at reset
-STIM 1 20 0      // This command will turn on stimulation on Channel 1 for 20 seconds. You will see a Red-Green LED (labelled Ch. 1) blink  very briefly (for 500us), every time the stimulation is generated (i.e, 20  times/sec)
+STIM 1 20 0      // This command will turn on stimulation on Channel 1 for 20 seconds. Ensure that the High Voltage Power Switch is ON. 
+                 // You will see a Red-Green LED (labelled Ch. 1) blink  very briefly (for 500us), every time the stimulation is generated (i.e, 20  times/sec)
 ```
 
 ## Moving forward
