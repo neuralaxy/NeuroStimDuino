@@ -141,14 +141,14 @@ void setAmplitude_Callback(SerialCommands* sender)
     sender->GetSerial()->println("ERROR! Amplitude is missing ");
     return;
   }
-  int val = atoi(val_str);
-  if (val < AMPL_LOW_LIMIT || val > AMPL_UPP_LIMIT)
+  float valf = atof(val_str); //int val = atoi(val_str);
+  if (valf < AMPL_LOW_LIMIT || valf > AMPL_UPP_LIMIT)
   {
     sender->GetSerial()->println("ERROR! Value outside range ");
     return;
   }
   //Convert stim amplitude from milliAmps to digital potentiometer counts (0-127)
-  val = val/current_conversion_ratio;
+  int val = round(valf/current_conversion_ratio);
   i2c_error = I2Cwrite(ThreeBytesCommds, AMPL, chan, val); 
   if (i2c_error != 0){
     sender->GetSerial()->print("I2C error = ");
@@ -158,11 +158,11 @@ void setAmplitude_Callback(SerialCommands* sender)
   // Now read the register value
   val = I2Cread(1);	
   //Convert stim amplitude from digital potentiometer count to milliAmps
-  val = ceil(val*current_conversion_ratio);
+  valf = val*current_conversion_ratio; //val = ceil(val*current_conversion_ratio);
   sender->GetSerial()->print("Channel ");
   sender->GetSerial()->print(chan);
   sender->GetSerial()->print(", amplitude is set to ");
-  sender->GetSerial()->print(val);					
+  sender->GetSerial()->print(valf,3);					
   sender->GetSerial()->println(" mA");
 }
 
