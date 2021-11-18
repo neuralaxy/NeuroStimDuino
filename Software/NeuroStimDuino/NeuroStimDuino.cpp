@@ -613,6 +613,7 @@ void readRegister_Callback(SerialCommands* sender)
 {
 	int i2c_error = -1;
 	int reg_val = 0;
+	float reg_valf = 0;
 	char* chan_str = sender->Next();
 	if (chan_str == NULL)
 	{
@@ -638,6 +639,7 @@ void readRegister_Callback(SerialCommands* sender)
 		sender->GetSerial()->print("I2C error = ");
 		sender->GetSerial()->println(i2c_error);
 	}
+	delay(3); // Required for dsPIC to finish processing I2C write command
 	// Now read the register value
 	if (reg_addr == DURN){
 		reg_val = I2Cread(2);	
@@ -645,7 +647,7 @@ void readRegister_Callback(SerialCommands* sender)
 		reg_val = I2Cread(1);
 		if (reg_addr == AMPL){
 			//Convert stim amplitude from digital potentiometer count to milliAmps
-			reg_val = ceil(reg_val*current_conversion_ratio);
+			reg_valf = reg_val*current_conversion_ratio;
 		}
 	}	
 	sender->GetSerial()->print("Channel ");
@@ -653,13 +655,18 @@ void readRegister_Callback(SerialCommands* sender)
 	sender->GetSerial()->print(", ");
 	sender->GetSerial()->print(cmd_str);
 	sender->GetSerial()->print(" = ");
-	sender->GetSerial()->println(reg_val);					
+	if (reg_addr == AMPL){
+		sender->GetSerial()->println(reg_valf,3);					
+	}else {
+		sender->GetSerial()->println(reg_val);					
+	}
 }
 
 void print_Channel_Parameters(int chan_no)
 {
     uint8_t reg_addr;
     int reg_val = 0, i2c_err = 0;
+	float reg_valf = 0;
     char buff[50];
 
     sprintf(buff,"Channel %d Settings are: ", chan_no);
@@ -672,7 +679,7 @@ void print_Channel_Parameters(int chan_no)
         Serial.print("I2C error = ");
         Serial.println(i2c_err);
         }
-		
+	 delay(3); // Required for dsPIC to finish processing I2C write command
      // Now read the register value
      if (reg_addr == DURN){
        reg_val = I2Cread(2); 
@@ -680,10 +687,10 @@ void print_Channel_Parameters(int chan_no)
        reg_val = I2Cread(1); 
      }
       switch(reg_addr){
-       case AMPL:
+       case AMPL:				  				  
 				  //Convert stim amplitude from digital potentiometer count to milliAmps
-			      reg_val = ceil(reg_val*current_conversion_ratio);
-                  sprintf(buff,"Amplitude (mA): .........................%d", reg_val);                          
+			      reg_valf = reg_val*current_conversion_ratio;
+                  sprintf(buff,"Amplitude (mA): .............................%.2f", reg_valf);                          
                   Serial.println(buff); 
                   break;                                           
        case FREQ:
@@ -712,9 +719,11 @@ void print_Channel_Parameters(int chan_no)
        default:
                   break;           
       }
+	  delay(3); // Required for dsPIC to finish processing I2C write command
     }
     // Check if Channel is enabled/disabled    
     i2c_err = I2Cwrite(ThreeBytesCommds, READ, chan_no, ENAB);
+	delay(3); // Required for dsPIC to finish processing I2C write command
     reg_val = I2Cread(1); 
     if (reg_val == 1){
       Serial.println("Status: Enabled");                     
