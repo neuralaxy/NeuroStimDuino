@@ -45,7 +45,7 @@ An open source neurostimulator for students, researchers, and hobbyists interest
 
 * After uploading the example code NeuroStimDuino_SerialControl.ino and making the connections as above, when you first open the Serial terminal you will see the following welcome message. This mean that a successful connection between Arduino and NeuroStimDuino has been established. It will also give a readout of the current stimulation parameters for each channel. 
 
-![Welcome_message](https://user-images.githubusercontent.com/80208904/139626723-b4dfde3e-464e-4d69-8721-ae6790aae649.png)
+![Welcome_message](https://user-images.githubusercontent.com/80208904/142420135-adf1695d-dc7a-4a32-b45f-c45c8de938a6.png)
 
 * You can type in some example commands into Serial Monitor and change the settings for the stimulator (type one statement at a time). Also, the commands are case-sensitive, so type it in all caps. 
 ```
