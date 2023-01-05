@@ -1,7 +1,7 @@
 # NeuroStimDuino
 An open source neurostimulator for students, researchers, and hobbyists interested in neuroscience
 
-# Important update for 2023
+## Important update for 2023
 In January 2023 we have launched NeuroStimDuino v2.1, which comes with additional features and improved functionality than its predecessor NeuroStimDuino v1.0. 
 
 Here is a list of important upgrades for NeuroStimDuino v2.1 (NSDuino2.1): 
@@ -31,7 +31,9 @@ Here is a list of important upgrades for NeuroStimDuino v2.1 (NSDuino2.1):
   * We changed the onboard cable connectors for Channels 1 & 2 with new ones that are compatible with our stimulation cables and you no longer need to remove the cable shroud or sheath cover. This will hopefully help reduce the hassle during setup and the touchproof connectors will offer additional safety during use. 
 
 
-# Getting Started Tutorial
+# Getting Started Tutorial for NeuroStimDuino v2.1
+**_Important:_** For instructions on getting started with NeuroStimDuino v1.0, please click [here](https://github.com/neuralaxy/NeuroStimDuino/blob/main/NeuroStimDuino%20v1.0%20Getting%20Started.md#getting-started-tutorial-for-neurostimduino-v10)
+<!---
 * To get started, first and foremost familiarize yourself with NeuroStimDuino features, [board layout and pin diagram](https://www.crowdsupply.com/neuralaxy/neurostimduino)
 
 * If you just ordered the NeuroStimDuino board (without the accessory pack), then you will have received the following components.  
@@ -105,3 +107,4 @@ STIM 1 20 0      // This command will turn on stimulation on Channel 1 for 20 se
 * NeuroStimDuino is not intended for human use or animal use, without receiving prior approval from a local ethics committee such as Institutional Review Boards and Institutional Animal Care and Use Committees  
 * Under no circumstances, should the stimulation electrodes be placed across the chest or close to the heart
 * NeuroStimDuino requires an external DC input voltage from 6-20V to operate. We **strongly** recommend to use an external battery for this and avoid the use of an AC adapter or anything that's plugged into the AC mains
+--->
