@@ -1,7 +1,42 @@
 # NeuroStimDuino
 An open source neurostimulator for students, researchers, and hobbyists interested in neuroscience
 
-# Getting Started Tutorial
+## Important update for 2023
+In January 2023 we have launched NeuroStimDuino v2.1, which comes with additional features and improved functionality than its predecessor NeuroStimDuino v1.0. 
+
+Here is a list of important upgrades for NeuroStimDuino v2.1 (NSDuino2.1): 
+* Choosing between symmetrical and asymmetrical waveform shapes is now done entirely in software. In NeuroStimDuino v1.0, to switch from symmetrical to asymmetrical waveform, you had to change the jumper (J5, J6) as well as call the `SYMM` command. In NSDuino2.1, its handled entirely by software and the jumpers have been removed. In the default asymmetrical output mode, the anodic phase's amplitude is half of cathodic phase's amplitude and the duration of anodic phase is double that of the cathodic phase (to ensure charge balance). This ratio can be changed by modifying the firmware.
+
+* NSDuino2.1's I<sup>2</sup>C address is now stored on EEPROM. So, whenever you assign a new I<sup>2</sup>C address to NSDuino2.1 using the `ADDR` command, it will get stored permanently and will be recalled at power-on reset. This is especially helpful when communicating with multiple NeuroStimDuinos. In NeuroStimDuino v1.0, the address would reset to the default value (0x1A) everytime the board was turned on and you would have to painstakingly re-assign the new addresses each time. With NSDuino2.1 the new address only needs to be set once and it will store it on-board its EEPROM.
+
+* Many of NeuroStimDuino v1.0 users (who are acutally scientists!!) have asked whether it is possible to ramp up and down the stimulation intensity? Ramping is used in neurostimulation research to avoid sudden jerks and triggering painful sensations when applying electrical stimulation. With NSDuino2.1, we have also expanded our software (Arduino) library and now provide the option to Ramp Up and Down the stimulation intentsity. When you enable ramping by using the command `RAMP 1`, the stimulation intensity will gradually increase from 0 to the desired level over a 1 second interval. At the end of stimulation, the stimulation intensity will gradually decrease to zero over a 1 second interval. There are some caveats to using ramping: 
+  * In the scientific literature, ramping is usually done by increasing/decreasing the current amplitude. While this is doable, by changing the counts of our on-board digital potentiometer, it would require multiple SPI calls between the MCU and potentiometer which will introduce delays. Instead, we are performing ramping by gradually increasing the stimulation pulse-width. This is handled entirely by the MCU and hence it is more accurate. Additionally, it has the same effect as changing the stimulation current, so it won't affect the outcomes of your experiments. Refer to the below gif to understand how ramping essentially works:
+  
+  ![NSDuino_Ramping_gif](https://user-images.githubusercontent.com/80208904/210726288-6426e95b-322c-423b-a19b-45e27edf90cd.gif)
+  
+  * Currently, ramping only works for finite stimulation intervals. This means the `Stim Indefinitely` flag of the `STIM` command must be set to `FALSE`. An example code snippet is as follows:
+  
+  ```
+  RAMP 1          // Turn ON ramping on channels 1 & 2
+  STIM 1 5 0      // Stimulate on channel 1 for 5 sec, stim indefinitely flag = 0
+  RAMP 0          // Turn OFF ramping on channels 1 & 2
+  ```
+  * Ramping can also be deployed in NeuroStimDuino v1.0. This would require a firmware update. We will post an upgraded firmware for NeuroStimDuino v1.0 on our repository in a few weeks time. Feel free to reach out to us for any queries regarding ramping
+
+* Additional minor modifications:
+  * We removed the bi-color(red/green) LEDs to indicate when channels 1 and 2 are stimulating, with regular monocolor LEDs. These still function in the same way
+  
+  ![LEDs_changed](https://user-images.githubusercontent.com/80208904/210715605-54008530-ebbe-4a52-90f9-221777023e54.png)
+
+  * We changed the onboard cable connectors for Channels 1 & 2 with new ones that are compatible with our stimulation cables and you no longer need to remove the cable shroud or sheath cover. This will hopefully help reduce the hassle during setup and the touchproof connectors will offer additional safety during use. 
+
+
+# Getting Started Tutorial for NeuroStimDuino v2.1
+**_Important:_** For instructions on getting started with NeuroStimDuino v1.0, please click [here](https://github.com/neuralaxy/NeuroStimDuino/blob/main/NeuroStimDuino%20v1.0%20Getting%20Started.md#getting-started-tutorial-for-neurostimduino-v10)
+
+More details to follow soon...
+
+<!---
 * To get started, first and foremost familiarize yourself with NeuroStimDuino features, [board layout and pin diagram](https://www.crowdsupply.com/neuralaxy/neurostimduino)
 
 * If you just ordered the NeuroStimDuino board (without the accessory pack), then you will have received the following components.  
@@ -75,3 +110,4 @@ STIM 1 20 0      // This command will turn on stimulation on Channel 1 for 20 se
 * NeuroStimDuino is not intended for human use or animal use, without receiving prior approval from a local ethics committee such as Institutional Review Boards and Institutional Animal Care and Use Committees  
 * Under no circumstances, should the stimulation electrodes be placed across the chest or close to the heart
 * NeuroStimDuino requires an external DC input voltage from 6-20V to operate. We **strongly** recommend to use an external battery for this and avoid the use of an AC adapter or anything that's plugged into the AC mains
+--->
