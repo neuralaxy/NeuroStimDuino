@@ -39,7 +39,11 @@ Here is a list of important upgrades for NeuroStimDuino v2.1 (NSDuino2.1):
 # Getting Started Tutorial for NeuroStimDuino v2.1
 **_Important:_** For instructions on getting started with NeuroStimDuino v1.0, please click [here](https://github.com/neuralaxy/NeuroStimDuino/blob/main/NeuroStimDuino%20v1.0%20Getting%20Started.md#getting-started-tutorial-for-neurostimduino-v10)
 
-* To get started, first and foremost familiarize yourself with NeuroStimDuino board layout and pin diagram below:
+* To get started, first and foremost familiarize yourself with NeuroStimDuino pinout and board layout below:
+
+![NeuroStimDuino_v21_Pinout_Diagram png](https://user-images.githubusercontent.com/80208904/213846343-dc6b36f8-4060-457c-b830-5ba1f036120e.jpg)
+
+![NeuroStimDuino_v21_Components png](https://user-images.githubusercontent.com/80208904/213846347-981a3a14-a25d-4eea-af21-166ae5f73f79.jpg)
 
 * If you have ordered the NeuroStimDuino board (without the accessory pack), then you will have received the following components.
 
