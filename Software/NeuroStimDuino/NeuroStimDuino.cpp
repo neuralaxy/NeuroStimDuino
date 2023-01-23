@@ -14,7 +14,8 @@
 #include <SerialCommands.h>
 #include "NeuroStimDuino.h"
 
-volatile int NSDuino_address = default_i2c_addr; 
+volatile int NSDuino_address = default_i2c_addr;
+volatile bool Pulse_Channel_1 = false, Pulse_Channel_2 = false; 
 
 int I2Cwrite(int numbytes, uint8_t commd, uint8_t channel_no = -1, uint8_t data_lsb = -1, uint8_t data_msb = -1){
    int error = -1;
@@ -98,6 +99,8 @@ enum I2Ccommand str2enum (const char* reg)
 		return SYMM;
 	else if(!strcmp(reg, "ENAB"))
 		return ENAB;
+	else if(!strcmp(reg, "RAMP"))
+		return RAMP;
 	else
 		return ERR; // reg not found
 }
@@ -631,7 +634,7 @@ void readRegister_Callback(SerialCommands* sender)
 	// Convert string to I2C Register
 	enum I2Ccommand reg_addr = str2enum(cmd_str);
 	if (reg_addr == 0){
-		sender->GetSerial()->println("ERROR! Register not found");
+		sender->GetSerial()->println("ERROR! Register not found");		
 		return;
 	}
 	i2c_error = I2Cwrite(ThreeBytesCommds, READ, chan, reg_addr);
@@ -660,6 +663,40 @@ void readRegister_Callback(SerialCommands* sender)
 	}else {
 		sender->GetSerial()->println(reg_val);					
 	}
+}
+
+void enableRamping_Callback(SerialCommands* sender)
+{
+	 int i2c_error = -1; 
+	 char* val_str = sender->Next();
+	 if (val_str == NULL)
+	 {
+		sender->GetSerial()->println("ERROR! Value is missing ");
+		return;
+	 }
+	 int val = atoi(val_str);
+	 if (val != 0 && val != 1)
+	 {
+		sender->GetSerial()->println("ERROR! Value outside range ");
+		return;
+	 }
+	 i2c_error = I2Cwrite(ThreeBytesCommds, RAMP, -1, val); 
+	 if (i2c_error != 0){
+		sender->GetSerial()->print("I2C error = ");
+		sender->GetSerial()->println(i2c_error);   
+	 }
+	 
+	 delay(3); // Required for dsPIC to finish processing I2C write command
+	 // Now read the register value
+	 val = I2Cread(1);	
+	 sender->GetSerial()->print("Ramping");	 
+	 if (val == 0){
+		 sender->GetSerial()->println(" is disabled on channels 1 & 2");
+	 }else if (val == 1){
+		 sender->GetSerial()->println(" is enabled on channels 1 & 2");
+	 }else{
+		 sender->GetSerial()->println(" has malfunctioned, check!!");		 
+	 }   
 }
 
 void print_Channel_Parameters(int chan_no)
@@ -731,6 +768,62 @@ void print_Channel_Parameters(int chan_no)
       Serial.println("Status: Disabled");                     
     }         
 }
+
+void startPulse_Callback(SerialCommands* sender)
+{
+  int i2c_error = -1; 
+  char* chan_str = sender->Next();
+  if (chan_str == NULL)
+  {
+    sender->GetSerial()->println("ERROR! Channel # is missing ");
+    return;
+  }
+  int chan = atoi(chan_str);
+  
+  char* val_str = sender->Next();
+  if (val_str == NULL)
+  {
+    sender->GetSerial()->println("ERROR! Value is missing ");
+    return;
+  }
+  int val = atoi(val_str);
+  if (val != 0 && val != 1)
+  {
+    sender->GetSerial()->println("ERROR! Value outside range ");
+    return;
+  }
+  switch(chan){
+	  case 1:
+			 if (val == 1){
+				Pulse_Channel_1 = true;
+				sender->GetSerial()->println("Pulse stim is ON on Channel 1");
+			  }else{
+				Pulse_Channel_1 = false;
+				sender->GetSerial()->println("Pulse stim is OFF on Channel 1");
+			  }
+			  break;
+	  case 2:
+			if (val == 1){
+				Pulse_Channel_2 = true;
+				sender->GetSerial()->println("Pulse stim is ON on Channel 2");
+			  }else{
+				Pulse_Channel_2 = false;
+				sender->GetSerial()->println("Pulse stim is OFF on Channel 2");
+			  }
+			  break;
+  }   
+}
+
+void startStimulationPulse(int chan_no)
+{
+  int i2c_error = -1;
+  i2c_error = I2Cwrite(TwoBytesCommds, SAMP, chan_no);
+  if (i2c_error != 0){
+    Serial.print("I2C error = ");
+    Serial.println(i2c_error);
+  }
+}
+
 /*
 NeuroStimDuino::NeuroStimDuino(uint8_t addr = default_i2c_addr)
 {  

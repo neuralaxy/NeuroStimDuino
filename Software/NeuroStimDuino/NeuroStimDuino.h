@@ -36,12 +36,12 @@
 #define ThreeBytesCommds 3 
 #define TwoBytesCommds 2
 #define OneByteCommds 1
-#define AMPL_UPP_LIMIT  25	//25 milliAmps max
+#define AMPL_UPP_LIMIT  31	//31 milliAmps max
 #define AMPL_LOW_LIMIT  0
 #define FREQ_UPP_LIMIT  100
 #define FREQ_LOW_LIMIT  3
 #define DURN_UPP_LIMIT  2000
-#define DURN_LOW_LIMIT  0
+#define DURN_LOW_LIMIT  7	//Clock resolution is 6.4us, hence minimum allowed is 7 us
 #define IDLY_UPP_LIMIT  255
 #define IDLY_LOW_LIMIT  0
 #define DELY_UPP_LIMIT  165  //50% of max. possible @3Hz stim frequency, 
@@ -53,7 +53,8 @@
 const int ArduinoLedPin = 13;
 const int Data_samples_size = 100;
 const float current_conversion_ratio = 0.24; // 0.24 mA/(digiPOT_count) 
-extern volatile int NSDuino_address; 
+extern volatile int NSDuino_address;
+extern volatile bool Pulse_Channel_1, Pulse_Channel_2; 
 
 enum I2Ccommand {
 	ERR  = 0x00,    
@@ -71,6 +72,7 @@ enum I2Ccommand {
     STIM = 0x10,
     STOP = 0x12,
     ENAB = 0x14,
+	RAMP = 0x1B,
     WAIT = 0x20		//unimplemented
 };
 
@@ -89,9 +91,12 @@ void stopStimulation_Callback(SerialCommands* );
 void enableChannel_Callback(SerialCommands* );
 void setEmergencyOFF_Callback(SerialCommands* );
 void startCurrentSampling_Callback(SerialCommands* );
+void startPulse_Callback(SerialCommands* );
 void readRegister_Callback(SerialCommands* );
+void enableRamping_Callback(SerialCommands* );
 void cmd_unrecognized(SerialCommands* , const char* );
 void print_Channel_Parameters(int );
+void startStimulationPulse(int );
 int I2Cwrite(int , uint8_t , uint8_t , uint8_t , uint8_t );
 int I2Cread(int ); 
 char* I2Cread_byte_array(int );

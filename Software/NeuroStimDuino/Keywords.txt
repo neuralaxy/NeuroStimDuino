@@ -22,6 +22,8 @@ STIM	KEYWORD1
 STOP	KEYWORD1
 ENAB	KEYWORD1
 WAIT	KEYWORD1
+RAMP	KEYWORD1
+PULSE 	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -46,7 +48,9 @@ setIdle_Callback	KEYWORD2
 commandsMenu_Callback	KEYWORD2
 startCurrentSampling_Callback	KEYWORD2
 readRegister_Callback	KEYWORD2
+enableRamping_Callback	KEYWORD2
 print_Channel_Parameters	KEYWORD2
+startPulse_Callback	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
