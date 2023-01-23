@@ -38,8 +38,10 @@ SerialCommand startStimulation("STIM", startStimulation_Callback);              
 SerialCommand stopStimulation("STOP", stopStimulation_Callback);                // e.g. STOP 2        // Stop channel 2
 SerialCommand enableChannel("ENAB", enableChannel_Callback);                    // e.g. ENAB 1 1      // will enable channel 1; ENAB 1 0 will disable channel 1
 SerialCommand setEmergencyOFF("EOFF", setEmergencyOFF_Callback);                // e.g. EOFF
-SerialCommand startCurrentSampling("SAMP", startCurrentSampling_Callback);		// e.g. SAMP 1        // sample current on channel 1 @20kHz
-SerialCommand readRegister("READ", readRegister_Callback);          			// e.g. READ 1 AMPL	  // Read current value of channel 1 amplitude
+SerialCommand startCurrentSampling("SAMP", startCurrentSampling_Callback);		  // e.g. SAMP 1        // sample current on channel 1 @20kHz
+SerialCommand readRegister("READ", readRegister_Callback);          			      // e.g. READ 1 AMPL	  // Read current value of channel 1 amplitude
+SerialCommand enableRamping("RAMP", enableRamping_Callback);                    // e.g. RAMP 1        // 1 - Start ramp Up & Down stimulatin intensity (i.e. pulse-duration) during start & end of stimulation
+                                                                                                      // 0 - Stop ramping on both channels
 
 /* Pending
 SerialCommand setIdle("WAIT", setIdle_Callback);
@@ -74,6 +76,7 @@ void setup()
   serial_commands_.AddCommand(&setEmergencyOFF);
   serial_commands_.AddCommand(&startCurrentSampling);
   serial_commands_.AddCommand(&readRegister);
+  serial_commands_.AddCommand(&enableRamping);
 
   //serial_commands_.AddCommand(&setIdle); 
   //serial_commands_.AddCommand(&commandsMenu);
