@@ -1,5 +1,10 @@
 # Getting Started Tutorial for NeuroStimDuino v1.0
-* To get started, first and foremost familiarize yourself with NeuroStimDuino features, [board layout and pin diagram](https://www.crowdsupply.com/neuralaxy/neurostimduino)
+* To get started, first and foremost familiarize yourself with NeuroStimDuino's board layout and pinout below
+
+![NeuroStimDuino_Components](https://user-images.githubusercontent.com/80208904/214124324-84fbcbf7-0764-46e1-80fb-bdf20084936c.png)
+
+![NeuroStimDuino_Pinout_Diagram](https://user-images.githubusercontent.com/80208904/214124358-4c9e049d-30d0-4960-936b-c94567d5d1d9.png)
+
 
 * If you just ordered the NeuroStimDuino board (without the accessory pack), then you will have received the following components.  
 ![CS_NEUROSTIM_01](https://user-images.githubusercontent.com/80208904/139623705-254dc788-df37-42cd-ad99-0f92750ce4e5.png)
