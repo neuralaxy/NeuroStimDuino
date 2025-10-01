@@ -1,6 +1,17 @@
 # NeuroStimDuino
 An open source neurostimulator for students, researchers, and hobbyists interested in neuroscience
 
+## Update for 2025 - NeuroStimDuino v3.0  launched!! :boom: :boom: 💫
+Hello NeuroStim Enthusiats!! Its been a while....over the last year, we have been busy revising the design of NeuroStimDuino. The main reason for the modifying NSDuino2.1 was that one of its crucial components, the high voltage DC-DC converter NMT0572SC from Murata has now became obsolete and out of circulation. Sadly, there was no alternative component that could take its place and we spend months trying to find a replacement. 
+
+Finally we had a breakthrough, and we found another DC-DC converter IH0524 from XP Power. We had to redesign the board slightly to incorporate this Converter. But the *downside* is that the new converter only allows a compliance voltage of 35V instead of 60V available in the previous versions. How will this effect your experiments? Well, it means that now you will have to take extra effort in minimizing the skin impedance to deliver higher currents. But we have tried stimulating our arm muscles using this newer version, and it is just as effective as before. And we highly recommend using hydrogel electrodes, as we have suggested before in the [Zucchini](https://www.crowdsupply.com/neuralaxy/neurostimduino/updates/tips-on-electrode-placement) experiment. 
+
+On the *upside*, while we were redesigning the board, we replaced the manual High Voltage slide switch with an electronic switch (see below). So now, you don't have to worry about turning ON the high voltage switch before activating the stimulator. Whenever you give the STIM command, the microcontroller will automatically turn ON the high voltage supply and once the stimulation is turned off, the high voltage supply is automatically turned off. Another benefit of adding the electronic switch is that it will minimize power consumption, since the high-voltage supply doesn't need to be always ON. Now that's smart😎.
+
+<img width="3182" height="1609" alt="Replaced_Slide_Switch_with_SSR" src="https://github.com/user-attachments/assets/0fea120a-9c40-4458-85fc-b0134da14ceb" />
+
+All the other features from NSDuino2.1, like ramping stimulation intensity, touchproof conenctors, etc. have been carried over to NSDuino3.0. Late in September 2025, we launched NeuroStimDuino v3.0 abd shipped out the first batch to our distributor Mouser. A big shout out for 📢 Mouser for consistently supporting us over the years. Some of you might have already received the newer version. Try it and let us know how it goes.  
+
 ## Important update for 2023
 In January 2023 we have launched NeuroStimDuino v2.1, which comes with additional features and improved functionality than its predecessor NeuroStimDuino v1.0. 
 
